@@ -14,11 +14,18 @@ html=html.replace('<link rel="stylesheet" href="hardware3d.css">','<style>'+(roo
 html=html.replace('<link rel="stylesheet" href="upgrade.css">','<style>'+(root/'upgrade.css').read_text(encoding='utf-8')+'</style>')
 html=html.replace('<link rel="stylesheet" href="buildcores.css">','<style>'+(root/'buildcores.css').read_text(encoding='utf-8')+'</style>')
 html=html.replace('<link rel="stylesheet" href="buildcores-ui.css">','<style>'+(root/'buildcores-ui.css').read_text(encoding='utf-8')+'</style>')
+html=html.replace('<link rel="stylesheet" href="brand-map.css">','<style>'+(root/'brand-map.css').read_text(encoding='utf-8')+'</style>')
 data=(root/'data.js').read_text(encoding='utf-8')
 app=(root/'app.js').read_text(encoding='utf-8')
-script='const ASSETS='+json.dumps(media,ensure_ascii=False)+';\n'+data+'\n'+(root/'catalog-data.js').read_text(encoding='utf-8')+'\n'+(root/'opendb-data.js').read_text(encoding='utf-8')+'\n'+(root/'hardware3d.js').read_text(encoding='utf-8')+'\n'+(root/'learning-upgrade.js').read_text(encoding='utf-8')+'\n'+(root/'buildcores-upgrade.js').read_text(encoding='utf-8')+'\n'+(root/'buildcores-ui.js').read_text(encoding='utf-8')+'\n'+app
+scripts=['catalog-data.js','opendb-data.js','hardware3d.js','learning-upgrade.js','buildcores-upgrade.js','buildcores-ui.js']
+script='const ASSETS='+json.dumps(media,ensure_ascii=False)+';\n'+data+'\n'+'\n'.join((root/name).read_text(encoding='utf-8') for name in scripts)
+brand_data=json.loads((root/'assets/brands/manifest.json').read_text(encoding='utf-8'))
+(root/'brand-map-data.js').write_text('/* Public study images and dated ZOL attention snapshots; see assets/brands/README.md. */\nconst BRAND_MAP_DATA='+json.dumps(brand_data,ensure_ascii=False,separators=(',',':'))+';\n',encoding='utf-8')
+for item in list(brand_data['images'].values())+[r['media'] for s in brand_data['rankings'].values() for r in s['items']]:
+ item['src']='data:image/webp;base64,'+base64.b64encode((root/item['file']).read_bytes()).decode()
+script+='\nconst BRAND_MAP_DATA='+json.dumps(brand_data,ensure_ascii=False)+';\n'+(root/'brand-map.js').read_text(encoding='utf-8')+'\n'+app
 assert '</script' not in script.lower()
-html=html.replace('<script src="data.js"></script><script src="catalog-data.js"></script><script src="opendb-data.js"></script><script src="hardware3d.js"></script><script src="learning-upgrade.js"></script><script src="buildcores-upgrade.js"></script><script src="buildcores-ui.js"></script><script src="app.js"></script>','<script>'+script+'</script>')
+html=re.sub(r'<script src="data.js"></script>.*?<script src="app.js"></script>',lambda _: '<script>'+script+'</script>',html,flags=re.S)
 target=root/'硬件漫游.html'
 target.write_text(html,encoding='utf-8')
 print(f'{target}\n{target.stat().st_size:,} bytes')

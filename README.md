@@ -9,6 +9,7 @@
 ## 可以做什么
 
 - 认识 20 类硬件和设备，浏览 158 个品牌索引及中文术语。
+- 品牌地图为 158 个品牌展示产品或官网图片；可切换 18 类设备的热门关注榜与高性价比候选，按预算、品类和品牌搜索筛选。
 - 在 2020 条型号样本中按品类、厂商和规格筛选，最多对比三个同类产品。
 - 旋转、拆解教学主机模型，切换桌面外设场景，跟随 9 步装机教学。
 - 比较机箱的同比例外形尺寸、包围盒体积与桌面占地。
@@ -35,6 +36,7 @@ python build_pages.py
 - 2000 条社区样本改编自 [BuildCores OpenDB](https://github.com/buildcores/buildcores-open-db)，固定源版本 `c6e319a47cbca29574e951d744e209c3de14f7d7`，采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)。本项目用于非商业学习。
 - 改编包括抽样、字段筛选、中文标签、插槽/板型字符串规范与外形体积计算。数据、许可和署名说明见 [`third-party/buildcores/`](third-party/buildcores/)。分发改编数据需遵守署名、非商业和相同方式共享条件。
 - 品牌商标与产品图片的权利属于各自权利人，来源见 [`assets/manifest.json`](assets/manifest.json)。数据许可不覆盖第三方图片和商标。
+- 品牌地图新增图片与榜单的逐条来源见 [`assets/brands/manifest.json`](assets/brands/manifest.json)，筛选方法与素材说明见 [`assets/brands/README.md`](assets/brands/README.md)。参考价与关注榜为带日期快照；高性价比候选按参考价与用户评分筛选，不提供实测性能价格比。
 - 教学模型和尺寸几何由本项目绘制，不是品牌实物模型。未复制 BuildCores 网站源码或品牌 3D 素材。
 
 重新生成固定版本的数据样本：
