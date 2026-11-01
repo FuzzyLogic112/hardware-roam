@@ -15,6 +15,7 @@ html=html.replace('<link rel="stylesheet" href="upgrade.css">','<style>'+(root/'
 html=html.replace('<link rel="stylesheet" href="buildcores.css">','<style>'+(root/'buildcores.css').read_text(encoding='utf-8')+'</style>')
 html=html.replace('<link rel="stylesheet" href="buildcores-ui.css">','<style>'+(root/'buildcores-ui.css').read_text(encoding='utf-8')+'</style>')
 html=html.replace('<link rel="stylesheet" href="brand-map.css">','<style>'+(root/'brand-map.css').read_text(encoding='utf-8')+'</style>')
+html=html.replace('<link rel="stylesheet" href="catalog-photos.css">','<style>'+(root/'catalog-photos.css').read_text(encoding='utf-8')+'</style>')
 data=(root/'data.js').read_text(encoding='utf-8')
 app=(root/'app.js').read_text(encoding='utf-8')
 scripts=['catalog-data.js','opendb-data.js','hardware3d.js','learning-upgrade.js','buildcores-upgrade.js','buildcores-ui.js']
@@ -23,7 +24,11 @@ brand_data=json.loads((root/'assets/brands/manifest.json').read_text(encoding='u
 (root/'brand-map-data.js').write_text('/* Public study images and dated ZOL attention snapshots; see assets/brands/README.md. */\nconst BRAND_MAP_DATA='+json.dumps(brand_data,ensure_ascii=False,separators=(',',':'))+';\n',encoding='utf-8')
 for item in list(brand_data['images'].values())+[r['media'] for s in brand_data['rankings'].values() for r in s['items']]:
  item['src']='data:image/webp;base64,'+base64.b64encode((root/item['file']).read_bytes()).decode()
-script+='\nconst BRAND_MAP_DATA='+json.dumps(brand_data,ensure_ascii=False)+';\n'+(root/'brand-map.js').read_text(encoding='utf-8')+'\n'+app
+catalog_photos=json.loads((root/'assets/catalog/manifest.json').read_text(encoding='utf-8'))
+(root/'catalog-photos-data.js').write_text('/* Attributed product photographs, independent of OpenDB specifications. */\nconst CATALOG_PHOTOS='+json.dumps(catalog_photos,ensure_ascii=False,separators=(',',':'))+';\n',encoding='utf-8')
+for asset in catalog_photos['assets'].values():
+ asset['src']='data:image/webp;base64,'+base64.b64encode((root/asset['file']).read_bytes()).decode()
+script+='\nconst BRAND_MAP_DATA='+json.dumps(brand_data,ensure_ascii=False)+';\n'+(root/'brand-map.js').read_text(encoding='utf-8')+'\nconst CATALOG_PHOTOS='+json.dumps(catalog_photos,ensure_ascii=False)+';\n'+(root/'catalog-photos.js').read_text(encoding='utf-8')+'\n'+app
 assert '</script' not in script.lower()
 html=re.sub(r'<script src="data.js"></script>.*?<script src="app.js"></script>',lambda _: '<script>'+script+'</script>',html,flags=re.S)
 target=root/'硬件漫游.html'
