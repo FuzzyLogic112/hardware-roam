@@ -1,0 +1,26 @@
+{
+  "gpu": {
+    "file": "assets/gpu.jpg",
+    "url": "https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/graphic-cards/50-series/rtx-5090/geforce-rtx-5090-bm-xl770-l.jpg",
+    "source": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+    "title": "NVIDIA GeForce RTX 5090"
+  },
+  "mouse": {
+    "file": "assets/mouse.png",
+    "url": "https://resource.logitechg.com/w_416,h_312,ar_4:3,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g502x-lightspeed/gallery/g502-x-lightspeed-mouse-top-angle-white-gallery-1.png",
+    "source": "https://www.logitechg.com/zh-cn/shop/c/gaming-mice",
+    "title": "Logitech G502 X LIGHTSPEED"
+  },
+  "keyboard": {
+    "file": "assets/keyboard.png",
+    "url": "https://resource.logitechg.com/w_416,h_312,ar_4:3,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g915-x-lightspeed-wireless/gallery/g915-x-wireless-mechanical-gaming-keyboard-gallery-1-us.png",
+    "source": "https://www.logitechg.com/zh-cn/shop/c/gaming-keyboards",
+    "title": "Logitech G915 X LIGHTSPEED"
+  },
+  "audio": {
+    "file": "assets/audio.png",
+    "url": "https://resource.logitechg.com/w_416,h_312,ar_4:3,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-x-2-lightspeed/gallery/gallery-1-pro-x-2-lightspeed-gaming-headset-black.png",
+    "source": "https://www.logitechg.com/zh-cn/shop/c/gaming-headsets-audio",
+    "title": "Logitech PRO X 2 LIGHTSPEED"
+  }
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>硬件漫游 · 从零认识你的电脑</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="hardware3d.css"><link rel="stylesheet" href="upgrade.css"><link rel="stylesheet" href="buildcores.css"><link rel="stylesheet" href="buildcores-ui.css"></head>
+<body class="dark">
+<a class="skip" href="#main">跳到学习内容</a>
+ <a class="logo" href="#home" aria-label="硬件漫游首页"><span class="logomark">▦</span><span>硬件漫游<small>PC 学习与配置工作台</small></span></a>
+<button id="ui-menu" aria-label="打开或关闭导航" aria-expanded="false" aria-controls="navigation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+<button id="ui-nav-shade" hidden aria-label="关闭导航"></button>
+<aside class="sidebar">
+
+ <nav id="navigation" aria-label="学习导航"></nav>
+ <div class="side-bottom"><div class="progress-label"><span>我的学习进度</span><b id="progress-text">0 / 20</b></div><progress id="progress" value="0" max="20"></progress><p>看完一节，点一下「学会了」。<br>进度保存在当前浏览器。</p><button class="text-button" id="export">导出学习记录 ↗</button></div>
+</aside>
+<div class="workspace">
+ <header class="topbar"><div class="breadcrumb" id="breadcrumb">学习空间 <span>/</span> 开始探索</div><div class="header-tools"><button class="global-open" id="global-open" aria-label="打开全站搜索，快捷键 Ctrl+K"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="6"></circle><path d="m15 15 6 6"></path></svg><span>搜索配件、品牌或术语</span><kbd>Ctrl K</kbd></button><span class="offline-tag">● 可离线学习</span><button class="icon-button" id="theme" aria-label="切换深色模式" title="切换深色模式">◐</button><a class="ui-header-build" href="#planner">我的配置</a></div></header>
+ <main id="main" tabindex="-1"></main>
+ <footer><span>硬件漫游 · 面向第一次认真了解电脑的你</span><a href="#sources">资料与图片来源</a></footer>
+</div>
+<dialog id="lesson-dialog" aria-labelledby="lesson-title"><div id="dialog-content"></div></dialog>
+<dialog id="global-search" aria-labelledby="global-search-title"><h2 id="global-search-title" class="sr-only">全站搜索</h2><div class="global-search-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="6"></circle><path d="m15 15 6 6"></path></svg><label class="sr-only" for="global-query">搜索品牌、型号、配件和术语</label><input id="global-query" type="search" autocomplete="off" placeholder="搜索型号、品牌、术语或装机步骤"><button data-global-close aria-label="关闭全站搜索">Esc</button></div><div class="global-search-meta"><span id="search-result-count" role="status"></span><span>↑ ↓ 选择 · Enter 打开</span></div><div id="global-results" class="global-results"></div></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="data.js"></script><script src="catalog-data.js"></script><script src="opendb-data.js"></script><script src="hardware3d.js"></script><script src="learning-upgrade.js"></script><script src="buildcores-upgrade.js"></script><script src="buildcores-ui.js"></script><script src="app.js"></script>
+</body></html>

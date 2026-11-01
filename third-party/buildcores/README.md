@@ -1,0 +1,130 @@
+_Curious about a hosted API or 3D configurator? See the [BuildCores API](https://buildcores.github.io/buildcores-render-client/)._
+
+![BuildCores Logo](assets/opendb.png)
+
+# BuildCores OpenDB
+
+The world's largest, community-driven, and open database for PC components and tech products. This repository contains structured data about computer hardware components that can be used for compatibility checking, component research, and building PC builder / part picking apps.
+
+_For an easy way to browse and search all components in a user-friendly interface, you can visit:_
+https://buildcores.com/products
+
+_You can click on the 'Edit in OpenDB' button on each part to open the GitHub page for it_
+
+![GPU image](assets/gpu.png)
+
+## Help Wanted / Bounties
+
+We have a few near-term goals for this project to improve data quality and increase the utility of BuildCores (or any other project that relies on this data).
+
+- We want to collect manufacturer product page urls for each product in our database.
+- We want to collect PDFs for each product in our database.
+  - Good examples are motherboard and case manuals. We can extract useful information out of these.
+- We want to collect motherboard BIOS versioning data along with CPU support lists.
+- We want to expand our retailer coverage outside of the USA.
+- ... more to come. If you have any specific requests from this project, please open a GitHub issue.
+
+## Repository Structure
+
+- `/open-db/` - Contains component data organized by category (CPU, GPU, RAM, etc.)
+- `/schemas/` - JSON schemas that define the structure and validation rules for each component type
+- `/docs/` - Documentation for contributors
+- `/.github/workflows/` - Workflows to validate schemas and sync with our internal API
+
+## How to Use
+
+### Accessing Component Data
+
+All component data is stored in the `/open-db/` directory, organized by component category. Each component is stored as a separate JSON file with a UUID v4 filename.
+
+```
+/open-db/
+  /CPU/
+    e0230286-0549-4da9-8115-9d1fbdcc2979.json
+    ...
+  /GPU/
+    ...
+  /RAM/
+    ...
+```
+
+Each product page on the BuildCores website has an "Edit on GitHub" button that allows you to directly contribute changes to the specific component, making it easy to update or fix information.
+
+### Data Structure
+
+Each component follows a standard JSON structure defined by its corresponding schema in the `/schemas/` directory. For example, a CPU component contains information about:
+
+- Core counts and threading
+- Clock speeds
+- Cache sizes
+- Socket type
+- TDP
+- Integrated graphics (if applicable)
+- Retailer SKUs
+
+For details about stable record IDs, versioned product identifiers, and the meaning of `type` in schemas and Storage records, see [OpenDB data model notes](docs/DATA_MODEL.md).
+
+### Product Variants
+
+Many products come in multiple variants (e.g., different colors, speeds, or editions). These are grouped together using the `metadata` fields:
+
+- `metadata.manufacturer` - The company that makes the product
+- `metadata.series` - The product line/series name
+- `metadata.variant` - What distinguishes this specific variant
+
+For detailed guidance on adding variants, see [docs/VARIANTS.md](docs/VARIANTS.md).
+
+## How to Contribute
+
+### Adding or Updating Components
+
+1. **Fork the repository** and create a new branch for your changes
+2. **Add or modify component JSON files** in the appropriate category directory
+   - For new components, create a new JSON file with a UUID v4 filename and include this same UUID in the `opendb_id` field
+   - For existing components, modify the component's JSON file
+3. **Validate your changes** against the appropriate schema
+4. **Submit a pull request** with your changes
+
+### PR Validation
+
+When you submit a pull request, GitHub Actions will automatically:
+
+1. Validate your JSON files against the appropriate schemas
+2. Post validation results as a comment on your PR
+3. Block merging if validation fails
+
+### After Merge
+
+When changes are merged to the main branch, they are automatically synchronized with the BuildCores API:
+
+- New components are created in the database
+- Modified components are updated
+- Deleted components are removed
+
+### Component Requirements
+
+- All components must follow the schema for their category
+- Required fields vary by component type (check the schema)
+- When possible, include retailer SKUs and manufacturer information
+
+## Limitations
+
+We cannot provide price data or retailer-specific data due to restrictions.
+
+## License
+
+New data added to OpenDB is made available under [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 (CC BY-NC-SA)](LICENSE.txt).
+
+For noncommercial use, you are free:
+
+- To share: To copy, distribute and use the database.
+- To create: To produce works from the database.
+- To adapt: To modify, transform and build upon the database.
+
+As long as you:
+
+- Attribute: Credit BuildCores OpenDB, keep the license notices, link to the license, and say what you changed.
+- Noncommercial: Commercial use requires a separate license and written approval from BuildCores for data we can license.
+- ShareAlike: If you publicly share a modified database, use CC BY-NC-SA 4.0 or another license allowed by its ShareAlike terms.
+
+For commercial use, [request a license](docs/licensing/README.md#commercial-requests). Existing permissions remain valid. See [NOTICE.md](NOTICE.md) for details about which data uses this license.
